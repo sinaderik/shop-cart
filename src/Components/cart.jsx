@@ -7,7 +7,7 @@ import { useCartContext } from "../context";
 
 const Cart = () => {
 
-  const { cart, clearCart } = useCartContext();
+  const { cart,total, clearCart } = useCartContext();
 
   function RenderContent() {
     if (cart.length > 0) {
@@ -24,7 +24,7 @@ const Cart = () => {
             <div className="text-center mb-4 pb-3 border-bottom">
               <h3 className="h5 mb-3 pb-1">جمع کل</h3>
               <h4 className="fw-normal">
-                350,000 تومان
+                {total} تومان
               </h4>
             </div>
             <a onClick={clearCart} className="btn btn-primary btn-shadow d-block w-100 mt-4" >حذف همه آیتم ها</a>

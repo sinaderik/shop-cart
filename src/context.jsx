@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react"
+import { createContext, useContext, useEffect } from "react"
 import cartItems from './data'
 import { useReducer } from "react";
 import { reducer } from './reducer'
@@ -23,13 +23,15 @@ export function CartProvider({ children }) {
     function remove(id) {
         dispatch({ type: "REMOVE", payload: id })
     }
-    
-    function changeQuantity(changeObj){
-        dispatch({ type: "CHANGE_QUANTITY", payload:changeObj })
-    } 
-    
+
+    function changeQuantity(changeObj) {
+        dispatch({ type: "CHANGE_QUANTITY", payload: changeObj })
+    }
+    useEffect(() => {
+        dispatch({ type: "GET_TOTALS" })
+    }, [state.cart])
     return (
-        <CartContext.Provider value={{ ...state, clearCart, remove,changeQuantity }} >
+        <CartContext.Provider value={{ ...state, clearCart, remove, changeQuantity }} >
             {children}
         </CartContext.Provider>
     )
